@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="도쿄 여행">
+<meta name="theme-color" content="#F4F5FA">
+<title>도쿄 여행 동선</title>
+<style>
+:root{--bg:#F4F5FA;--card:#fff;--ink:#1B1F3B;--muted:#6B7090;--line:#E3E6F2;--pin:#2B3A8C;--route:#5C6BC0;--mapbg:#F3F4FA;--road:#DDE2F0;--chip:#FAEEDA;--chipt:#633806;--on:#2B3A8C;--ont:#fff;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#12141F;--card:#1C2030;--ink:#ECEEF8;--muted:#9AA0BC;--line:#2C3250;--pin:#4A5BD8;--route:#7C8CFF;--mapbg:#23283D;--road:#2F3654;--chip:#412402;--chipt:#FAC775;--on:#4A5BD8;--ont:#fff;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#12141F;--card:#1C2030;--ink:#ECEEF8;--muted:#9AA0BC;--line:#2C3250;--pin:#4A5BD8;--route:#7C8CFF;--mapbg:#23283D;--road:#2F3654;--chip:#412402;--chipt:#FAC775;--on:#4A5BD8;--ont:#fff;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px);height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 -apple-system,"Apple SD Gothic Neo","Noto Sans KR",system-ui,sans-serif;-webkit-text-size-adjust:100%}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:10}
+main{max-width:520px;margin:0 auto;padding:20px 16px 40px}
+h1{font-size:28px;margin:8px 0 4px;font-weight:700}
+.sub{color:var(--muted);font-size:14px;margin:0 0 16px}
+.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:8px 0 12px}
+.tab{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:14px;padding:8px 0;font:inherit;line-height:1.3;cursor:pointer}
+.tab b{display:block;font-size:16px}.tab span{font-size:12px;color:var(--muted)}
+.tab.on{background:var(--on);border-color:var(--on);color:var(--ont)}.tab.on span{color:var(--ont);opacity:.85}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:16px;margin-bottom:16px}
+h2{font-size:20px;margin:0 0 2px}h3{font-size:15px;color:var(--muted);margin:16px 0 8px;font-weight:600}
+.lead{color:var(--muted);font-size:14px;margin:0 0 12px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 4px}
+.chip{background:var(--chip);color:var(--chipt);border-radius:999px;padding:4px 12px;font-size:13px;font-weight:600}
+.map{background:var(--mapbg);border-radius:16px;padding:4px}
+svg{display:block;width:100%;height:auto}
+.ln{stroke:var(--route);stroke-width:3;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.dash{stroke:var(--muted);stroke-width:2.5;stroke-dasharray:6 5;fill:none;stroke-linecap:round}
+.metro{stroke:#E24B4A;stroke-width:3;fill:none;stroke-linecap:round}
+.road{fill:var(--road)}.pin{fill:var(--pin)}
+.n{fill:#fff;font-size:13px;font-weight:600;text-anchor:middle;dominant-baseline:central}
+.l{fill:var(--ink);font-size:14px;font-weight:600}.s{fill:var(--muted);font-size:12px}.st{fill:none;stroke:var(--ink);stroke-width:1.6}
+.m{text-anchor:middle}.e{text-anchor:end}
+.legend{display:flex;gap:16px;font-size:12px;color:var(--muted);margin:8px 2px 0}
+.legend i{display:inline-block;width:22px;border-top:3px solid var(--route);vertical-align:middle;margin-right:6px}.legend i.d{border-top:3px dashed var(--muted)}
+ol.tl{list-style:none;margin:0;padding:0}
+ol.tl li{display:grid;grid-template-columns:92px 1fr;gap:10px;padding:9px 0;border-top:1px solid var(--line);font-size:14px}
+ol.tl li:first-child{border-top:0}
+ol.tl b{font-variant-numeric:tabular-nums;font-size:13px}
+ol.tl small{display:block;color:var(--muted);font-size:12px}
+ol.tl li.key b,ol.tl li.key span{color:#BA7517}
+:root:not([data-theme="light"]) ol.tl li.key b{color:#FAC775}
+.note{font-size:13px;color:var(--muted);padding-left:18px;margin:0}
+.note li{margin:4px 0}
+.empty{text-align:center;color:var(--muted);padding:32px 8px;font-size:14px}
+a{color:var(--route)}
+</style>
+</head>
+<body>
+<main>
+<h1>도쿄 여행</h1>
+<p class="sub">동선 · 체류시간 · 이동시간 (어림값)</p>
+<nav class="tabs">
+<button class="tab" data-d="1"><b>Day 1</b><span>11/27 금</span></button>
+<button class="tab" data-d="2"><b>Day 2</b><span>11/28 토</span></button>
+<button class="tab" data-d="3"><b>Day 3</b><span>11/29 일</span></button>
+<button class="tab" data-d="4"><b>Day 4</b><span>11/30 월</span></button>
+</nav>
+
+<section class="day" id="day1">
+<div class="card">
+<h2>Day 1 · 11/27 금 <span style="font-size:14px;font-weight:400;color:var(--muted)">나리타 · 긴자 · 이케부쿠로</span></h2>
+<p class="lead">나리타 도착 → 긴자 점심 → 이케부쿠로 팝업 · 굿즈 투어</p>
+<div class="chips"><span class="chip">12:50 나리타 공항버스 출발</span><span class="chip">15:00 잇타이칸 출발</span></div>
+
+<h3>나리타 → 긴자</h3>
+<div class="map"><svg viewBox="0 0 340 290" role="img" aria-label="나리타 공항에서 긴자까지의 간단 동선 지도">
+<rect class="road" x="304" y="0" width="8" height="290"/>
+<line class="ln" x1="240" y1="45" x2="130" y2="185"/>
+<line class="ln" x1="130" y1="185" x2="215" y2="245"/>
+<line class="metro" x1="98" y1="150" x2="58" y2="99"/>
+<polygon points="52,92 62,97 54,103" fill="#E24B4A"/>
+<text class="l" x="24" y="78">이케부쿠로 방면</text>
+<text class="s" x="84" y="116">마루노우치선 25분</text>
+<rect class="st" x="92" y="144" width="12" height="12" rx="3"/><text class="s" x="112" y="140">긴자역</text>
+<rect class="st" x="144" y="252" width="12" height="12" rx="3"/><text class="s e" x="138" y="263">히가시긴자역</text>
+<text class="s" x="206" y="112">공항버스</text><text class="s" x="206" y="128">12:50 출발 · 70분</text>
+<circle class="pin" cx="240" cy="45" r="12"/><text class="n" x="240" y="45">1</text>
+<text class="l" x="258" y="41">나리타공항</text><text class="s" x="258" y="57">10:55 도착</text>
+<circle class="pin" cx="130" cy="185" r="12"/><text class="n" x="130" y="185">2</text>
+<text class="l" x="148" y="181">긴자 · 숙소</text><text class="s" x="148" y="197">14:00 도착</text>
+<circle class="pin" cx="215" cy="245" r="12"/><text class="n" x="215" y="245">3</text>
+<text class="l" x="233" y="241">잇타이칸</text><text class="s" x="233" y="257">14:30 점심</text>
+</svg></div>
+<ol class="tl" style="margin-top:8px">
+<li><b>10:55</b><span>나리타 도착</span></li>
+<li><b>~12:15</b><span>입국심사 · 짐 찾기 · 세관<small>약 70분</small></span></li>
+<li><b>~12:30</b><span>버스 정류장 이동 · 티켓<small>약 15분</small></span></li>
+<li class="key"><b>12:50 ★</b><span>공항버스 출발 (늦어도)<small>승차 약 70분, 정체 시 +10~20분</small></span></li>
+<li><b>14:00</b><span>긴자 도착 → 숙소 다이에이에 짐 맡기기<small>도보 포함 약 20분 · 체크인 15시</small></span></li>
+<li><b>14:20</b><span>잇타이칸까지 도보<small>약 10분 · <a href="https://maps.app.goo.gl/5RUYKuZrK2yav2yh9">구글맵 ↗</a></small></span></li>
+<li><b>14:30~15:00</b><span>점심 (약 30분)</span></li>
+<li class="key"><b>15:00 ★</b><span>식당 출발 (늦어도 15:05)</span></li>
+</ol>
+
+<h3>이케부쿠로</h3>
+<div class="map"><svg viewBox="0 0 340 330" role="img" aria-label="이케부쿠로 추천 동선 지도">
+<rect class="road" x="304" y="0" width="8" height="330"/>
+<line class="ln" x1="85" y1="200" x2="125" y2="285"/>
+<polyline class="ln" points="125,285 235,235 255,95"/>
+<line class="ln" x1="255" y1="95" x2="140" y2="140"/>
+<line class="dash" x1="140" y1="140" x2="125" y2="285"/>
+<line class="dash" x1="125" y1="285" x2="36" y2="304"/>
+<rect class="st" x="16" y="298" width="12" height="12" rx="3"/><text class="s" x="40" y="318">이케부쿠로역</text>
+<circle class="pin" cx="85" cy="200" r="12"/><text class="n" x="85" y="200">4</text>
+<text class="l m" x="85" y="162">파르코</text><text class="s m" x="85" y="178">16:00 팝업</text>
+<circle class="pin" cx="140" cy="140" r="12"/><text class="n" x="140" y="140">7</text>
+<text class="l" x="158" y="136">오토메로드</text><text class="s" x="158" y="152">K-BOOKS 등</text><text class="s" x="158" y="168">18:30~20:00</text>
+<circle class="pin" cx="255" cy="95" r="12"/><text class="n" x="255" y="95">6</text>
+<text class="l m" x="255" y="60">치이카와파크</text><text class="s m" x="255" y="76">17:20~18:20</text>
+<circle class="pin" cx="125" cy="285" r="12"/><text class="n" x="125" y="285">5</text>
+<text class="l" x="143" y="281">애니메이트 본점</text><text class="s" x="143" y="297">16:20~16:55</text><text class="s" x="143" y="313">마무리 20:00~21:00</text>
+</svg></div>
+<div class="legend"><span><i></i>추천 경로</span><span><i class="d"></i>마무리 · 귀가</span></div>
+<ol class="tl" style="margin-top:8px">
+<li><b>15:00~15:50</b><span>긴자역 도보 → 마루노우치선 → 파르코<small>도보 10분 + 지하철 25분 + 도보 12~15분</small></span></li>
+<li><b>16:00~16:20</b><span>치이카와랜드 팝업 (파르코)<small>10~30분 · 예약 변경 15:30 → 16:00 (추첨, 미확정)</small></span></li>
+<li><b>16:20~16:55</b><span>애니메이트 본점 첫 방문<small>도보 7분 + 약 28분</small></span></li>
+<li><b>16:55~17:10</b><span>선샤인시티 쪽으로 이동<small>도보 약 12분</small></span></li>
+<li class="key"><b>17:20 ★</b><span>치이카와파크 입장 (약 1시간)<small>선샤인시티 아넥스 · 시간 지정 입장</small></span></li>
+<li><b>18:30~20:00</b><span>오토메로드: K-BOOKS, 스텔라워스 등<small>K-BOOKS 코스프레관 20시 마감</small></span></li>
+<li><b>20:00~21:00</b><span>애니메이트 본점 마무리<small>21시 마감</small></span></li>
+<li><b>21:00~21:40</b><span>이케부쿠로역 → 긴자역 → 숙소<small>약 40분</small></span></li>
+</ol>
+</div>
+<div class="card"><h3 style="margin-top:0">확인할 것</h3>
+<ul class="note">
+<li>시간은 모두 평균 어림값이에요. 공항버스 시간표는 당일 확인하세요.</li>
+<li>팝업 16시 변경이 안 되면(15:30 유지) 점심이 어려워서 건너뛰거나 저녁으로 바꿔야 해요.</li>
+<li>스텔라워스 위치는 아직 확인하지 못해서 지도에 넣지 않았어요.</li>
+<li>가게 영업시간과 치이카와파크 운영시간은 방문 전에 한 번 더 확인하세요.</li>
+<li>지도의 위치와 거리는 모양만 간단히 그린 거예요.</li>
+</ul></div>
+</section>
+
+<section class="day" id="day2" hidden><div class="card"><h2>Day 2 · 11/28 토</h2><div class="empty">아직 비어 있어요.<br>일정이 정해지면 채워 넣을게요.</div></div></section>
+<section class="day" id="day3" hidden><div class="card"><h2>Day 3 · 11/29 일</h2><div class="empty">아직 비어 있어요.<br>일정이 정해지면 채워 넣을게요.</div></div></section>
+<section class="day" id="day4" hidden><div class="card"><h2>Day 4 · 11/30 월</h2><div class="empty">아직 비어 있어요.<br>일정이 정해지면 채워 넣을게요.</div></div></section>
+</main>
+<script>
+function show(n){
+  document.querySelectorAll('.tab').forEach(function(b){b.classList.toggle('on',b.dataset.d==n)});
+  document.querySelectorAll('.day').forEach(function(p){p.hidden=p.id!=='day'+n});
+  try{localStorage.setItem('tokyoDay',n)}catch(e){}
+  if(location.hash!=='#day'+n)location.hash='day'+n;
+  window.scrollTo(0,0);
+}
+document.querySelectorAll('.tab').forEach(function(b){b.addEventListener('click',function(){show(b.dataset.d)})});
+function fromHash(){var m=location.hash.match(/^#day([1-4])$/);return m?m[1]:null}
+window.addEventListener('hashchange',function(){var n=fromHash();if(n)show(n)});
+var saved=null;try{saved=localStorage.getItem('tokyoDay')}catch(e){}
+show(fromHash()||saved||'1');
+</script>
+</body>
+</html>
